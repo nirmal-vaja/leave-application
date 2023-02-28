@@ -1,5 +1,5 @@
 # Change these
-server '13.232.8.94', port: 22, roles: [:web, :app, :db], primary: true
+server '172.31.46.120', roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:nirmal-vaja/leave-application.git'
 set :application,     'leave-application'
@@ -91,4 +91,4 @@ end
 
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
-# kill -s SIGTERM pid   # Stop puma
+# kill -s SIGTERM pid   # Stop puma 
