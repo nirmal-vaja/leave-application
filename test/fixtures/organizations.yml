@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  established_year: 2023-03-01 15:44:58
+  address: MyText
+  support_email: MyString
+  contact_number: MyString
+  type: 
+  city: MyString
+  state: MyString
+  country: MyString
+  description: MyText
+  website_url: MyString
+
+two:
+  name: MyString
+  established_year: 2023-03-01 15:44:58
+  address: MyText
+  support_email: MyString
+  contact_number: MyString
+  type: 
+  city: MyString
+  state: MyString
+  country: MyString
+  description: MyText
+  website_url: MyString

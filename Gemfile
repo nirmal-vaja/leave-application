@@ -72,3 +72,4 @@ group :test do
 end
 
 gem 'devise'
+gem 'ros-apartment', require: 'apartment'
