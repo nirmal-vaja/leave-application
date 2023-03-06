@@ -10,18 +10,34 @@ class Api::OrganizationsController < ApplicationController
 
   def create
     @organization = Organization.new(organization_params)
-  end
 
-  def show
-
-  end
-
-  def update
-
-  end
-  
-  def destroy
-
+    if @organization.save
+      current = current_tenant
+      switch_tenant(@organization.subdomain)
+      user = User.new(
+        first_name: "",
+        last_name: "",
+        date_of_joining: @organization.established_year,
+        phone_number: "",
+        email: params[:admin_email],
+        password: params[:admin_password],
+        admin: true
+      )
+      user.save
+      switch_tenant(current)
+      render json: {
+        message: "Organization has been created.",
+        status: true,
+        data: {
+          organization: @organization
+        }
+      }
+    else
+      render json: {
+        message: @organization.errors.full_messages.join(' '),
+        status: false
+      }
+    end
   end
 
   private
@@ -31,7 +47,6 @@ class Api::OrganizationsController < ApplicationController
   end
 
   def organization_params
-    params.require(:organization).permit(:name, :established_year, :address, :support_email, :contact_number, :type, :city, :state, :country, :description, :website_url, :subdomain
-    )
+    params.require(:organization).permit(:name, :established_year, :address, :support_email, :contact_number, :type, :city, :state, :country, :description, :website_url, :subdomain)
   end
 end
