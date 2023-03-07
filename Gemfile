@@ -73,3 +73,4 @@ end
 
 gem 'devise'
 gem 'ros-apartment', require: 'apartment'
+gem 'doorkeeper'

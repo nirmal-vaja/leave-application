@@ -6,10 +6,12 @@ class SubdomainConstraint
 end
 
 Rails.application.routes.draw do
+  use_doorkeeper
   constraints SubdomainConstraint do
     devise_for :users
   end
 
+  draw :api
   # devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
