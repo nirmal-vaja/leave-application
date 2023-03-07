@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def switch_tenant(subdomain)
+  def switch_tenant(subdomain="public")
     Apartment::Tenant.switch!(subdomain)
   end
 
