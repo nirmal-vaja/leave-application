@@ -83,6 +83,4 @@ test:
 #
 production:
   <<: *default
-  database: leave_application_production
-  username: leave_application
-  password: <%= ENV["LEAVE_APPLICATION_DATABASE_PASSWORD"] %>
+  database: leave_application
