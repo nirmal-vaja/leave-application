@@ -8,6 +8,7 @@ end
 Rails.application.routes.draw do
   constraints SubdomainConstraint do
     devise_for :users
+    resources :leaves, only: [:index, :show, :create, :update, :destroy]
   end
   
   root "home#index"
