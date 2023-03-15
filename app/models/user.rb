@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   scope :has_one_admin, -> { where(admin: true) }
+
+  has_many :leaves, dependent: :destroy, class_name: "Leave"
 end
