@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_tenant
-    subdomain = request.subdomain
+    subdomain = params[:subdomain]
 
     subdomain.present? ? Apartment::Tenant.switch!(subdomain) : Apartment::Tenant.switch!
   end
