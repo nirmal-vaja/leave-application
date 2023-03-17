@@ -10,7 +10,7 @@ module Api
           data: {
             holidays: @holidays
           },
-          status: true
+          status: :ok
         }
       end
     
@@ -20,12 +20,12 @@ module Api
             data: {
               holiday: @holiday
             },
-            status: true
+            status: :ok
           }
         else
           render json: {
             message: "No holidays found",
-            status: false
+            status: :unprocessable_entity
           }
         end
       end
@@ -39,12 +39,12 @@ module Api
             data: {
               holiday: @holiday
             },
-            status: true
+            status: :created
           }
         else
           render json: {
             message: @holiday.errors.full_messages.join(' '),
-            status: false
+            status: :unprocessable_entity
           }
         end
       end
@@ -54,7 +54,7 @@ module Api
           if @holiday.update(holiday_params)
             render json: {
               message: "Holiday has been updated",
-              status: true,
+              status: :updated,
               data: {
                 holiday: @holiday
               }
@@ -62,13 +62,13 @@ module Api
           else
             render json: {
               message: @holiday.errors.full_messages.join(' '),
-              status: false
+              status: :unprocessable_entity
             }
           end
         else
           render json: {
             message: "Holiday not found",
-            status: false
+            status: :unprocessable_entity
           }
         end
       end
@@ -78,12 +78,12 @@ module Api
           if @holiday.destroy
             render json: {
               message: "The holiday data has been removed",
-              status: true
+              status: :ok
             }
           else
             render json: {
               message: @holiday.errors.full_messages.join(' '),
-              status: false
+              status: :unprocessable_entity
             }
           end
         else

@@ -7,6 +7,7 @@ namespace :api do
     end
     resources :leaves, only: [:index, :show, :create, :update, :destroy]
     resources :holidays, only: [:index, :show, :create, :update, :destroy] 
+    resources :organizations, only: [:index, :create]
   end
 end
 

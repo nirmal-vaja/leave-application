@@ -8,7 +8,8 @@ module Api
         render json: {
           data: {
             leaves: @leaves
-          }
+          },
+          status: :ok
         }
       end
     
@@ -18,12 +19,12 @@ module Api
             data: {
               leave: @leave
             },
-            status: true
+            status: :ok
           }
         else
           render json: {
             message: "Leave not found",
-            status: false
+            status: :unprocessable_entity
           }
         end
       end
@@ -34,7 +35,7 @@ module Api
         if @leave.save
           render json: {
             message: "Leave has been requested, wait for the approval!",
-            status: true,
+            status: :created,
             data:{
               leave: @leave
             }
@@ -42,7 +43,7 @@ module Api
         else
           render json: {
             message: @leave.errors.full_messages.join(' ')
-            status: false
+            status: :unprocessable_entity
           }
         end
       end
@@ -52,7 +53,7 @@ module Api
           if @leave.update(leave_params)
             render json: {
               message: "Leave has been updated, wait for the approval",
-              status: true,
+              status: :ok,
               data: {
                 leave: @leave
               }
@@ -60,13 +61,13 @@ module Api
           else
             render json: {
               message: @leave.errors.full_messages.join(' '),
-              status: false
+              status: :unprocessable_entity
             }
           end
         else
           render json: {
             message: "Leave not found"
-            status: false
+            status: :unprocessable_entity
           }
         end
       end
@@ -76,18 +77,18 @@ module Api
           if @leave.destroy
             render json: {
               message: "Leave has been permanently removed.",
-              status: true
+              status: :ok
             }
           else
             render json: {
               message: @leave.errors.full_messages.join(' '),
-              status: false
+              status: :unprocessable_entity
             }
           end
         else
           render json: {
             message: "Leave not found",
-            status: false
+            status: :unprocessable_entity
           }
         end
       end
