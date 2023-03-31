@@ -1,6 +1,8 @@
 class Organization < ApplicationRecord
 
-  after_create :create_tenant
+  enum :status, %i(pending accepted rejected)
+  
+  after_update :create_tenant
 
   def admin
     if Apartment::Tenant.current == subdomain
@@ -14,6 +16,11 @@ class Organization < ApplicationRecord
   private
 
   def create_tenant
-    Apartment::Tenant.create(subdomain)
+    case status
+    when "accepted"
+      Apartment::Tenant.create(subdomain)
+    when "rejected"
+      Apartment::Tenant.drop(subdomain)
+    end
   end
 end

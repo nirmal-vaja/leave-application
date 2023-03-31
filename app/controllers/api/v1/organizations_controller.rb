@@ -1,6 +1,9 @@
 module Api
   module V1
     class OrganizationsController < ApiController
+
+    before_action :find_organization, only: [:update_status]      
+
       def index
         @organizations = Organization.all
         render json: {
@@ -42,6 +45,21 @@ module Api
           }
         end
       end
+
+      def update_status
+        if @organization.update(organization_params)
+          render json: {
+            data: {
+              organization: @organization
+            }, status: :ok
+          }
+        else
+          render json: {
+            message: @organization.errors.full_messages.join(' '),
+            status: :unprocessable_entity
+          }
+        end
+      end
     
       private
     
@@ -50,7 +68,7 @@ module Api
       end
     
       def organization_params
-        params.require(:organization).permit(:name, :established_year, :address, :support_email, :contact_number, :type, :city, :state, :country, :description, :website_url, :subdomain)
+        params.require(:organization).permit(:name, :established_year, :address, :support_email, :contact_number, :type, :city, :state, :country, :description, :website_url, :subdomain, :status)
       end
     end
   end
