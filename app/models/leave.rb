@@ -7,6 +7,8 @@ class Leave < ApplicationRecord
 
   after_commit :count_number_of_days
 
+  enum :status, %i(pending accepted rejected)
+
   def time
     created_at.to_fs(:time)
   end

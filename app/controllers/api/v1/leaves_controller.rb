@@ -1,7 +1,7 @@
 module Api
   module V1
     class LeavesController < ApiController
-      before_action :find_leave, only: [:show, :update, :destroy]
+      before_action :find_leave, only: [:show, :update, :destroy, :update_status]
     
       def index
         @leaves = Leave.all
@@ -24,6 +24,21 @@ module Api
         else
           render json: {
             message: "Leave not found",
+            status: :unprocessable_entity
+          }
+        end
+      end
+
+      def update_status
+        if @leave.update(status: params[:status])
+          render json: {
+            data: {
+              leave: @leave
+            }, status: :ok
+          }
+        else
+          render json: {
+            message: @leave.errors.full_messages.join(' '),
             status: :unprocessable_entity
           }
         end
@@ -100,7 +115,7 @@ module Api
       end
     
       def leave_params
-        params.require(:leave).permit(:start_date, :end_date, :subject, :description)
+        params.require(:leave).permit(:start_date, :end_date, :subject, :description, :status)
       end
     end
   end
