@@ -2,7 +2,7 @@ class Organization < ApplicationRecord
 
   enum :status, %i(pending accepted rejected)
   
-  after_update :create_tenant
+  after_create :create_tenant
 
   def admin
     if Apartment::Tenant.current == subdomain
