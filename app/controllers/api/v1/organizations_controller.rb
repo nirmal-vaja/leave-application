@@ -29,15 +29,21 @@ module Api
             password: params[:admin_password],
             admin: true
           )
-          user.save
-          Apartment::Tenant.switch!(current)
-          render json: {
-            message: "Organization has been created.",
-            status: :created,
-            data: {
-              organization: @organization
+          if user.save
+            Apartment::Tenant.switch!(current)
+            render json: {
+              message: "Organization has been created.",
+              status: :created,
+              data: {
+                organization: @organization
+              }
             }
-          }
+          else
+            render json: {
+              message: user.errors.full_messages.join(' '),
+              status: :unprocessable_entity
+            }
+          end
         else
           render json: {
             message: @organization.errors.full_messages.join(' '),
