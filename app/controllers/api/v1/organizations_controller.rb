@@ -23,7 +23,7 @@ module Api
           user = User.new(
             first_name: @organization.name,
             last_name: "'s Admin",
-            date_of_joining: @organization.established_year,
+            date_of_joining: Date.today,
             phone_number: "9898989898",
             email: params[:admin_email],
             password: params[:admin_password],
