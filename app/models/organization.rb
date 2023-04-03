@@ -16,11 +16,6 @@ class Organization < ApplicationRecord
   private
 
   def create_tenant
-    case status
-    when "accepted"
-      Apartment::Tenant.create(subdomain)
-    when "rejected"
-      Apartment::Tenant.drop(subdomain)
-    end
+    Apartment::Tenant.create(subdomain)
   end
 end
