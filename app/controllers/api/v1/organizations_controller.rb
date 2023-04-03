@@ -1,7 +1,7 @@
 module Api
   module V1
     class OrganizationsController < ApiController
-
+    skip_before_action :doorkeeper_authorize!
     before_action :find_organization, only: [:update_status]      
 
       def index

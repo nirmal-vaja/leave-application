@@ -57,7 +57,7 @@ module Api
           }
         else
           render json: {
-            message: @leave.errors.full_messages.join(' ')
+            message: @leave.errors.full_messages.join(' '),
             status: :unprocessable_entity
           }
         end
