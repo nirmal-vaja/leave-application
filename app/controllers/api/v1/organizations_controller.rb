@@ -1,8 +1,8 @@
 module Api
   module V1
     class OrganizationsController < ApiController
-    skip_before_action :doorkeeper_authorize!
-    before_action :find_organization, only: [:update_status]      
+      skip_before_action :doorkeeper_authorize!
+      before_action :find_organization, only: [:update_status]      
 
       def index
         @organizations = Organization.all
@@ -18,8 +18,8 @@ module Api
         @organization = Organization.new(organization_params)
     
         if @organization.save
-          current = current_tenant
-          switch_tenant(@organization.subdomain)
+          current = Apartment::Tenant.current
+          Apartment::Tenant.switch!(@organization.subdomain)
           user = User.new(
             first_name: @organization.name,
             last_name: "'s Admin",
@@ -30,7 +30,7 @@ module Api
             admin: true
           )
           user.save
-          switch_tenant(current)
+          Apartment::Tenant.switch!(current)
           render json: {
             message: "Organization has been created.",
             status: :created,
