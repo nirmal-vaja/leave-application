@@ -81,7 +81,7 @@ module Api
           end
         else
           render json: {
-            message: "Leave not found"
+            message: "Leave not found",
             status: :unprocessable_entity
           }
         end
