@@ -16,6 +16,7 @@ namespace :api do
         put :update_status
       end
     end
+    resources :bank_infos, only: [:create, :update]
   end
 end
 
