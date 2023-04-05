@@ -15,6 +15,9 @@ namespace :api do
       member do
         put :update_status
       end
+      collection do
+        get :get_subdomains
+      end
     end
     resources :bank_infos, only: [:create, :update]
     resources :salaries, only: [:create]

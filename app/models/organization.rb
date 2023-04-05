@@ -1,5 +1,7 @@
 class Organization < ApplicationRecord
-
+  
+  scope :accepted, ->{ where("status==accepted") }
+  
   enum :status, %i(pending accepted rejected)
   
   after_create :create_tenant

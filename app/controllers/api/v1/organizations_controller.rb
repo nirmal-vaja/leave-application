@@ -13,6 +13,27 @@ module Api
           status: :ok
         }
       end
+
+      def get_subdomains
+        @subdomains = Organization.accepted.pluck(:subdomain)
+
+        if @subdomains
+          render json:
+          {
+            message: "These are the subdomains allowed",
+            status: :ok,
+            data: {
+              subdomains: @subdomains
+            }
+          }
+        else
+          render json:
+          {
+            message: "Invalid subdomain",
+            status: :unprocessable_entity
+          }
+        end
+      end
     
       def create
         @organization = Organization.new(organization_params)
