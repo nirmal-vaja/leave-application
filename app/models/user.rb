@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   has_many :leaves, dependent: :destroy, class_name: "Leave"
   has_many :bank_infos, dependent: :destroy
+  has_many :salaries, dependent: :destroy
 
 
   # the authenticate method from devise documentation

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_080851) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_092240) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_080851) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_bank_infos_on_user_id"
+  end
+
+  create_table "deductions", force: :cascade do |t|
+    t.integer "professional_tax"
+    t.integer "tax_deducted_at_source"
+    t.integer "employee_provident_fund"
+    t.integer "total_deduction"
+    t.bigint "salary_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["salary_id"], name: "index_deductions_on_salary_id"
   end
 
   create_table "holidays", force: :cascade do |t|
@@ -86,6 +97,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_080851) do
     t.integer "status", default: 0
   end
 
+  create_table "salaries", force: :cascade do |t|
+    t.integer "basic_salary"
+    t.integer "dearness_allowance"
+    t.integer "house_rent_allowance"
+    t.integer "conveyance_allowance"
+    t.integer "medical_allowance"
+    t.integer "special_allowance"
+    t.integer "gross_salary_pm"
+    t.integer "ctc_salary_pm"
+    t.integer "net_salary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.string "month"
+    t.integer "travel_allowance"
+    t.index ["user_id"], name: "index_salaries_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -105,6 +134,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_080851) do
   end
 
   add_foreign_key "bank_infos", "users"
+  add_foreign_key "deductions", "salaries"
   add_foreign_key "leaves", "users"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "salaries", "users"
 end

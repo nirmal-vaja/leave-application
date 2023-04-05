@@ -17,6 +17,7 @@ namespace :api do
       end
     end
     resources :bank_infos, only: [:create, :update]
+    resources :salaries, only: [:create]
   end
 end
 
