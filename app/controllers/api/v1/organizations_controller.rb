@@ -24,7 +24,6 @@ module Api
 
           if @organization.accepted?
             render json: {
-              message: "These are the subdomains allowed",
               status: :ok,
               data: {
                 subdomains: @subdomains
@@ -32,6 +31,9 @@ module Api
             }
           else
             render json: {
+              data: {
+                subdomains: @subdomains
+              }
               message: "Your request will be approved in short time!",
               status: :unprocessable_entity
             }
