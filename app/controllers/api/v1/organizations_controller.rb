@@ -3,6 +3,7 @@ module Api
     class OrganizationsController < ApiController
       skip_before_action :doorkeeper_authorize!
       before_action :find_organization, only: [:update_status]      
+      skip_before_action :set_tenant
 
       def index
         @organizations = Organization.all
@@ -17,7 +18,7 @@ module Api
       def get_subdomains
         @subdomains = Organization.accepted.pluck(:subdomain)
 
-        if @subdomains
+        if @subdomains && Apartment.tenant_names.include?(params[:subdomain])
 
           @organization = Organization.find_by(subdomain: params[:subdomain])
 
