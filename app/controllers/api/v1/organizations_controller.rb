@@ -33,7 +33,7 @@ module Api
             render json: {
               data: {
                 subdomains: @subdomains
-              }
+              },
               message: "Your request will be approved in short time!",
               status: :unprocessable_entity
             }
