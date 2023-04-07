@@ -18,14 +18,23 @@ module Api
         @subdomains = Organization.accepted.pluck(:subdomain)
 
         if @subdomains
-          render json:
-          {
-            message: "These are the subdomains allowed",
-            status: :ok,
-            data: {
-              subdomains: @subdomains
+
+          @organization = Organization.find_by(subdomain: params[:subdomain])
+
+          if @organization.accepted?
+            render json: {
+              message: "These are the subdomains allowed",
+              status: :ok,
+              data: {
+                subdomains: @subdomains
+              }
             }
-          }
+          else
+            render json: {
+              message: "Your request will be approved in short time!",
+              status: :unprocessable_entity
+            }
+          end
         else
           render json:
           {
