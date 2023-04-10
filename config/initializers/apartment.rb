@@ -114,4 +114,4 @@ end
 Rails.application.config.middleware.use Apartment::Elevators::Subdomain
 # Rails.application.config.middleware.use Apartment::Elevators::FirstSubdomain
 # Rails.application.config.middleware.use Apartment::Elevators::Host
-Apartment::Elevators::Subdomain.excluded_subdomains = ['www', 'ec2-65-1-3-48.ap-south-1.compute']
+Apartment::Elevators::Subdomain.excluded_subdomains = ['www', 'ec2-65-1-3-48.ap-south-1.compute', 'ec2-65-1-3-48']
