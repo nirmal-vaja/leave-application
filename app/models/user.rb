@@ -16,7 +16,8 @@ class User < ApplicationRecord
 
 
   # the authenticate method from devise documentation
-  def self.authenticate(email, password)
+  def self.authenticate(subdomain, email, password)
+    Apartment::Tenant.switch!(subdomain)
     user = User.find_for_authentication(email: email)
     user&.valid_password?(password) ? user : nil
   end

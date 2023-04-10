@@ -14,7 +14,7 @@ Doorkeeper.configure do
   # end
 
   resource_owner_from_credentials do
-    User.authenticate(params[:email], params[:password])
+    User.authenticate(params[:subdomain], params[:email], params[:password])
   end
 
   # enable grant flows
