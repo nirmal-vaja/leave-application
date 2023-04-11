@@ -518,3 +518,5 @@ Doorkeeper.configure do
   #
   # realm "Doorkeeper"
 end
+
+Doorkeeper::OAuth::ErrorResponse.send :prepend, CustomTokenErrorResponse
