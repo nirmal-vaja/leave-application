@@ -63,12 +63,18 @@ module Api
             admin: true
           )
           if user.save
+            doorkeeper_application = Doorkeeper::Application.first
             Apartment::Tenant.switch!(current)
             render json: {
               message: "Organization has been created.",
               status: :created,
               data: {
-                organization: @organization
+                organization: @organization,
+                doorkeeper_application: {
+                  name: doorkeeper_application.name,
+                  client_id: doorkeeper_application.uid,
+                  client_secret: doorkeeper_application.secret
+                }
               }
             }
           else
