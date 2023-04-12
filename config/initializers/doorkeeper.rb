@@ -456,6 +456,8 @@ Doorkeeper.configure do
   #   client.superapp? or resource_owner.admin?
   # end
 
+  skip_client_authentication_for_password_grant true
+
   skip_authorization do
     true
   end
