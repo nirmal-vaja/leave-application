@@ -31,7 +31,7 @@ module Api
         private 
 
         def user_params
-          params.require(:user).permit(:subdomain, :first_name, :last_name, :date_of_joining, :phone_number, :email, :password, :client_id)
+          params.require(:user).permit(:subdomain, :first_name, :last_name, :date_of_joining, :phone_number, :email, :password, :client_id, :designation)
         end
       end
     end
