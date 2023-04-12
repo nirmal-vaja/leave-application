@@ -93,10 +93,8 @@ module Api
 
 
       def get_authorization_details
-        @organization = Organization.find_by(subdomain: params[:id])
-
         current_tenant = Apartment::Tenant.current
-        Apartment::Tenant.switch!(params[:subdomain])
+        Apartment::Tenant.switch!(params[:id])
         doorkeeper_client = Doorkeeper::Application.first
         Apartment::Tenant.switch!(current_tenant)
         render json: {
