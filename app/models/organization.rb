@@ -26,7 +26,7 @@ class Organization < ApplicationRecord
     current_tenant = Apartment::Tenant.current
     Apartment::Tenant.switch!(subdomain)
     if Doorkeeper::Application.count == 0
-      Doorkeeper::Application.create(name:"React client for #{name}", redirect_uri: "", scopes: "")
+      Doorkeeper::Application.create(name:"React client for #{name}", redirect_uri: "", scopes: "", confidential: false)
     else
       Doorkeeper::Application.first
     end
