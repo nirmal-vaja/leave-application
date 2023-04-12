@@ -93,7 +93,7 @@ module Api
 
 
       def get_authorization_details
-        @organization = Organization.find_by(subdomain: params[:subdomain])
+        @organization = Organization.find_by(subdomain: params[:id])
 
         current_tenant = Apartment::Tenant.current
         Apartment::Tenant.switch!(params[:subdomain])
