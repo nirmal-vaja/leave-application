@@ -14,6 +14,7 @@ namespace :api do
     resources :organizations, only: [:index, :create] do
       member do
         put :update_status
+        get :get_authorization_details
       end
       collection do
         get :get_subdomains

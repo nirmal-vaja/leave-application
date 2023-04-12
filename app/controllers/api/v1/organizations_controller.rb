@@ -91,6 +91,23 @@ module Api
         end
       end
 
+
+      def get_authorization_details
+        @organization = Organization.find_by(subdomain: params[:subdomain])
+
+        current_tenant = Apartment::Tenant.current
+        Apartment::Tenant.switch!(params[:subdomain])
+        doorkeeper_client = Doorkeeper::Application.first
+        Apartment::Tenant.switch!(current_tenant)
+        render json: {
+          doorkeeper: {
+            name: doorkeeper_client.name,
+            client_id: doorkeeper_client.uid,
+            client_secret: doorkeeper_client.secret
+          }
+        }
+      end
+
       def update_status
         if @organization.update(organization_params)
           render json: {
