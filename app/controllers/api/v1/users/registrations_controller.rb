@@ -9,8 +9,8 @@ module Api
 
         def create
           current_tenant = Apartment::Tenant.current
-          Apartment::Tenant.switch!(user_params[:subdomain])
-          client_app = Doorkeeper::Application.find_by(uid: user_params[:client_id])
+          Apartment::Tenant.switch!(params[:subdomain])
+          client_app = Doorkeeper::Application.find_by(uid: params[:client_id])
 
           unless client_app
             return render json: {
