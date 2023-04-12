@@ -19,12 +19,12 @@ module Api
           end
           allowed_params = user_params.except(:client_id, :subdomain)
           user = User.new(allowed_params)
-          Apartment::Tenant.switch!(current_tenant)
           if user.save
             render json: render_user(user,client_app), status: :created
           else
             render json: { errors: user.errors }, status: :unprocessable_entity
           end
+          Apartment::Tenant.switch!(current_tenant)
         end
 
         private 
