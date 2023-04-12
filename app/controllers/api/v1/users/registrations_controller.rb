@@ -19,6 +19,7 @@ module Api
           end
           allowed_params = user_params.except(:client_id, :subdomain)
           user = User.new(allowed_params)
+          user.department = params[:department]
           if user.save
             render json: render_user(user,client_app), status: :created
           else
