@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates :email, format: URI::MailTo::EMAIL_REGEXP
   validates_presence_of :first_name, :last_name, :date_of_joining, :phone_number
-  validates_presence_of :pan_number, :if => Proc.new { |o| !o.admin }
+  # validates_presence_of :pan_number, :if => Proc.new { |o| !o.admin }
 
   scope :has_one_admin, -> { where(admin: true) }
 
