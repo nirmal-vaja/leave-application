@@ -4,7 +4,6 @@ class Leave < ApplicationRecord
   validates :start_date, presence: true
   validates :subject, presence: true
   validates :description, presence: true
-  validates_presence_of :end_date, :if => Proc.new{|o| o.number_of_days > 1}
 
   enum :status, %i(pending accepted rejected)
   enum :type, %i(cl sl lwp)
