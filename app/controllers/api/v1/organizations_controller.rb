@@ -2,6 +2,7 @@ module Api
   module V1
     class OrganizationsController < ApiController
       skip_before_action :doorkeeper_authorize!
+      skip_before_action :current_user
       before_action :find_organization, only: [:update_status]      
       skip_before_action :set_tenant
 
