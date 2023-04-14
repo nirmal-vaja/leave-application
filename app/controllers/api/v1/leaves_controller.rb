@@ -47,6 +47,7 @@ module Api
       def create
         @leave = Leave.new(leave_params)
         @leave.user = current_user
+        @leave.type = params[:type]
         if @leave.save
           render json: {
             message: "Leave has been requested, wait for the approval!",
@@ -115,7 +116,7 @@ module Api
       end
     
       def leave_params
-        params.require(:leave).permit(:start_date, :end_date, :subject, :description, :status, :type)
+        params.require(:leave).permit(:start_date, :end_date, :subject, :description, :status)
       end
     end
   end
