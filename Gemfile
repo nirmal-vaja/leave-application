@@ -82,3 +82,4 @@ gem 'ros-apartment', require: 'apartment'
 gem 'doorkeeper'
 gem 'pry-rails', :group => :development
 gem 'rack-cors'
+gem 'rolify'

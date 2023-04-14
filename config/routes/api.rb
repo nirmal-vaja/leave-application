@@ -10,6 +10,7 @@ namespace :api do
         put :update_status
       end
     end
+    resources :roles, only: [:index, :create, :destroy]
     resources :holidays, only: [:index, :show, :create, :update, :destroy] 
     resources :organizations, only: [:index, :create] do
       member do
