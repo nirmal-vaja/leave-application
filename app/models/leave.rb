@@ -4,7 +4,7 @@ class Leave < ApplicationRecord
   validates :start_date, presence: true
   validates :subject, presence: true
   validates :description, presence: true
-  validate_presence_of :end_date, :if => Proc.new{|o| o.number_of_days > 1}
+  validates_presence_of :end_date, :if => Proc.new{|o| o.number_of_days > 1}
 
   after_commit :count_number_of_days
 
