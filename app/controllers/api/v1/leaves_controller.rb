@@ -46,7 +46,7 @@ module Api
     
       def create
         @leave = Leave.new(leave_params)
-        @leave.user_id = current_user.id
+        @leave.user_id = doorkeeper_token[:resource_owner_id]
         @leave.type = params[:type]
         if @leave.save
           render json: {
