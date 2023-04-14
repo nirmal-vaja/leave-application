@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_13_065900) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_14_111634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_13_065900) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
-    t.integer "type"
+    t.integer "leave_type"
     t.index ["user_id"], name: "index_leaves_on_user_id"
   end
 

@@ -6,7 +6,7 @@ class Leave < ApplicationRecord
   validates :description, presence: true
 
   enum :status, %i(pending accepted rejected)
-  enum :type, %i(cl sl lwp)
+  enum :leave_type, %i(cl sl lwp)
 
   def time
     created_at.to_fs(:time)
