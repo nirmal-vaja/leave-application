@@ -47,7 +47,7 @@ module Api
       def create
         @leave = Leave.new(leave_params)
         @leave.user_id = doorkeeper_token[:resource_owner_id]
-        @leave.type = params[:type]
+        @leave.leave_type = params[:type]
         if @leave.save
           render json: {
             message: "Leave has been requested, wait for the approval!",
