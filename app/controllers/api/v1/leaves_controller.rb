@@ -4,7 +4,7 @@ module Api
       before_action :find_leave, only: [:show, :update, :destroy, :update_status]
     
       def index
-        @leaves = Leave.all
+        @leaves = User.find_by(id: doorkeeper_token[:resource_owner_id]).leaves
         render json: {
           data: {
             leaves: @leaves
