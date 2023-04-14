@@ -116,7 +116,7 @@ module Api
       end
     
       def leave_params
-        params.require(:leave).permit(:start_date, :end_date, :subject, :description, :status)
+        params.require(:leave).permit(:start_date, :end_date, :number_of_days, :subject, :description, :status)
       end
     end
   end
