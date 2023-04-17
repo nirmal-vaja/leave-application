@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_17_113236) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_17_114807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,7 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_113236) do
   end
 
   create_table "holidays", force: :cascade do |t|
-    t.datetime "date"
     t.string "occasion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
