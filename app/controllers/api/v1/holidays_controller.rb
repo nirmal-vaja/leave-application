@@ -1,6 +1,7 @@
 module Api
   module V1
     class HolidaysController < ApiController
+      skip_before_action :doorkeeper_authorize!, only: [:create]
       before_action :find_holiday, only: [:show, :update, :destroy]
     
       def index
@@ -32,7 +33,7 @@ module Api
     
       def create
         @holiday = Holiday.new(holiday_params)
-        
+        binding.pry        
         if @holiday.save
           render json: {
             mesage: "Holiday has been created.",
