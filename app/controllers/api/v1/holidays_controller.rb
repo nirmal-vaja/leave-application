@@ -33,7 +33,7 @@ module Api
     
       def create
         @holiday = Holiday.new(holiday_params)
-        binding.pry        
+
         if @holiday.save
           render json: {
             mesage: "Holiday has been created.",
